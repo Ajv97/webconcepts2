@@ -361,3 +361,36 @@ input[type=submit] {
     margin: 13px 0px 0px;
     width: 90px;
 }
+
+#searchBar{
+    margin:10px 0px;
+    height:25px;
+}
+
+#searchBar>*{
+    margin:0px;
+}
+
+#search{
+    width:250px;
+    padding:1px;
+    height:21.4px;
+    border:solid black 1px;
+}
+#searchButton{
+    height:25px;
+    width:50px;
+    padding:0px;
+    font-size:10px;
+    background-color:#E8E9E8;
+    border:solid black 1px;
+    border-radius:0px;
+    border-left-width:0px;
+}
+
+#searchOptions{
+    height:25px;
+    padding:0px;
+    border:solid black 1px;
+    border-left-width:0px;
+}

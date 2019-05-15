@@ -1,15 +1,22 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: May 13, 2019 at 06:59 PM
--- Server version: 5.7.25
--- PHP Version: 7.3.1
+-- Generation Time: May 15, 2019 at 06:44 PM
+-- Server version: 5.7.24
+-- PHP Version: 7.2.10
 
-SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `volga_db`
@@ -20,19 +27,19 @@ USE `volga_db`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblAuthors`
+-- Table structure for table `tblauthors`
 --
 
-CREATE TABLE `tblAuthors` (
+CREATE TABLE `tblauthors` (
   `authorId` int(10) UNSIGNED NOT NULL,
   `compositeName` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tblAuthors`
+-- Dumping data for table `tblauthors`
 --
 
-INSERT INTO `tblAuthors` (`authorId`, `compositeName`) VALUES
+INSERT INTO `tblauthors` (`authorId`, `compositeName`) VALUES
 (1, 'Ronald C. White Jr.'),
 (2, 'Jay A. Parry'),
 (3, 'Joseph J. Ellis'),
@@ -145,10 +152,10 @@ INSERT INTO `tblAuthors` (`authorId`, `compositeName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblBooks`
+-- Table structure for table `tblbooks`
 --
 
-CREATE TABLE `tblBooks` (
+CREATE TABLE `tblbooks` (
   `isbn` char(16) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `price` double DEFAULT NULL,
@@ -160,10 +167,10 @@ CREATE TABLE `tblBooks` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tblBooks`
+-- Dumping data for table `tblbooks`
 --
 
-INSERT INTO `tblBooks` (`isbn`, `title`, `price`, `pages`, `binding`, `pubDate`, `description`, `imageFilename`) VALUES
+INSERT INTO `tblbooks` (`isbn`, `title`, `price`, `pages`, `binding`, `pubDate`, `description`, `imageFilename`) VALUES
 ('0060598999', 'The Myth of the Rational Market: A History of Risk, Reward, and Delusion on Wall Street', 27.99, 400, 'HARDCOVER', '2009-06-01', '&lt;p&gt; Chronicling the rise and fall of the efficient market theory and the century-long making of the modern financial industry, Justin Fox\'s &lt;i&gt;The Myth of the Rational Market&lt;/i&gt; is as much an intellectual whodunit as a cultural history of the perils and possibilities of risk. The book brings to life the people and ideas that forged modern finance and investing, from the formative days of Wall Street through the Great Depression and into the financial calamity of today. It\'s a tale that features professors who made and lost fortunes, battled fiercely over ideas, beat the house in blackjack, wrote bestselling books, and played major roles on the world stage. It\'s also a tale of Wall Street\'s evolution, the power of the market to generate wealth and wreak havoc, and free market capitalism\'s war with itself. &lt;/p&gt; &lt;p&gt; The efficient market hypothesis&acirc;€”long part of academic folklore but codified in the 1960s at the University of Chicago&acirc;€”has evolved into a powerful myth. It has been the maker and loser of fortunes, the driver of trillions of dollars, the inspiration for index funds and vast new derivatives markets, and the guidepost for thousands of careers. The theory holds that the market is always right, and that the decisions of millions of rational investors, all acting on information to outsmart one another, always provide the best judge of a stock\'s value. That myth is crumbling. &lt;/p&gt; &lt;p&gt; Celebrated journalist and columnist Fox introduces a new wave of economists and scholars who no longer teach that investors are rational or that the markets are always right. Many of them now agree with Yale professor Robert Shiller that the efficient markets theory &Acirc;“represents one of the most remarkable errors in the history of economic thought.&Acirc;” Today the theory has given way to counterintuitive hypotheses about human behavior, psychological models of decision making, and the irrationality of the markets. Investors overreact, underreact, and make irrational decisions based on imperfect data. In his landmark treatment of the history of the world\'s markets, Fox uncovers the new ideas that may come to drive the market in the century ahead. &lt;/p&gt;', '0060598999.jpg'),
 ('0061625450', 'Baseball Americana: Treasures from the Library of Congress', 29.99, 256, 'HARDCOVER', '2009-10-01', '&lt;blockquote&gt; &lt;p&gt;A lavishly illustrated history of America\'s game, from the unparalleled collections of the Library of Congress&lt;/p&gt; &lt;/blockquote&gt; &lt;p&gt;Baseball, the sport that helped reunify the country in the years after the Civil War, remains the National Pastime. The Library of Congress houses the world\'s largest baseball collection, documenting the history of the game and providing a unique look at America since the late 1700s. Now &lt;i&gt;Baseball Americana&lt;/i&gt; presents the best of the best from that treasure trove. From baseball\'s biggest stars to street urchins, from its most newsworthy stories to sandlot and Little League games, the book examines baseball\'s hardscrabble origins, rich cultural heritage, and uniquely American character.&lt;/p&gt; &lt;p&gt;The more than 350 fabulous illustrations&acirc;€”many never before published&acirc;€”featured first-generation, vintage photographic and chromolithographic baseball cards; photographs of famous players and ballparks; and newspaper clippings, cartoons, New Deal photographs, and baseball advertisements. Packed with images that will surprise and thrill even the most expert collector, &lt;i&gt;Baseball Americana&lt;/i&gt; is a gift for every baseball fan. &lt;/p&gt;', '0061625450.jpg'),
 ('0061671738', 'Odd and the Frost Giants', 14.99, 128, 'HARDCOVER', '2009-11-01', '&lt;p&gt; In this inventive, short, yet perfectly formed novel inspired by traditional Norse mythology, Neil Gaiman takes readers on a wild and magical trip to the land of giants and gods and back. &lt;/p&gt; &lt;p&gt; In a village in ancient Norway lives a boy named Odd, and he\'s had some very bad luck: His father perished in a Viking expedition; a tree fell on and shattered his leg; the endless freezing winter is making villagers dangerously grumpy. &lt;/p&gt; &lt;p&gt; Out in the forest Odd encounters a bear, a fox, and an eagle&acirc;€”three creatures with a strange story to tell. &lt;/p&gt; &lt;p&gt; Now Odd&Acirc;&nbsp;is forced on a stranger journey than he had imagined&acirc;€”a journey to save Asgard, city of the gods, from the Frost Giants who have invaded it. &lt;/p&gt; &lt;p&gt; It\'s going to take a very special kind of twelve-year-old boy to outwit the Frost Giants, restore peace to the city of gods, and end the long winter. &lt;/p&gt; &lt;p&gt; Someone cheerful and infuriating and clever . . . &lt;/p&gt; &lt;p&gt; Someone just like Odd . &lt;/p&gt;', '0061671738.jpg'),
@@ -189,7 +196,7 @@ INSERT INTO `tblBooks` (`isbn`, `title`, `price`, `pages`, `binding`, `pubDate`,
 ('0345497511', 'The City &amp; The City', 26, 336, 'HARDCOVER', '2009-05-26', '&lt;i&gt;New York Times&lt;/i&gt; bestselling author China Mi&Atilde;&copy;ville delivers his most accomplished novel yet, an existential thriller set in a city unlike any other&acirc;€“real or imagined.&lt;br&gt;&lt;br&gt;When a murdered woman is found in the city of Beszel, somewhere at the edge of Europe, it looks to be a routine case for Inspector Tyador Borl&Atilde;&ordm; of the Extreme Crime Squad. But as he investigates, the evidence points to conspiracies far stranger and more deadly than anything he could have imagined.&lt;br&gt;&lt;br&gt;Borl&Atilde;&ordm; must travel from the decaying Beszel to the only metropolis on Earth as strange as his own. This is a border crossing like no other, a journey as psychic as it is physical, a shift in perception, a seeing of the unseen. His destination is Beszel&acirc;€™s equal, rival, and intimate neighbor, the rich and vibrant city of Ul Qoma. With Ul Qoman detective Qussim Dhatt, and struggling with his own transition, Borl&Atilde;&ordm; is enmeshed in a sordid underworld of rabid nationalists intent on destroying their neighboring city, and unificationists who dream of dissolving the two into one. As the detectives uncover the dead woman&acirc;€™s secrets, they begin to suspect a truth that could cost them and those they care about more than their lives. &lt;br&gt;&lt;br&gt;What stands against them are murderous powers in Beszel and in Ul Qoma: and, most terrifying of all, that which lies between these two cities.&lt;br&gt;&lt;br&gt;Casting shades of Kafka and Philip K. Dick, Raymond Chandler and 1984, &lt;b&gt;The City &amp; the City&lt;/b&gt; is a murder mystery taken to dazzling metaphysical and artistic heights.', '0345497511.jpg'),
 ('0345499395', 'Strong Fathers, Strong Daughters: 10 Secrets Every Father Should Know', 14.95, 288, 'PAPERBACK', '2007-08-28', 'In today&acirc;€™s increasingly complicated world, it&acirc;€™s often difficult for parents to connect with their daughters&acirc;€“and especially so for fathers. In this unique and invaluable guide, Dr. Meg Meeker, a pediatrician with more than twenty years&acirc;€™ experience counseling girls, reveals that a young woman&acirc;€™s relationship with her father is far more important than we&acirc;€™ve ever realized. To become a strong, confident woman, a daughter needs her father&acirc;€™s attention, protection, courage, and wisdom. Dr. Meeker shares the ten secrets every father needs to know in order to strengthen or rebuild bonds with his daughter and shape her life&acirc;€“and his own&acirc;€“for the better. Inside you&acirc;€™ll discover:&lt;br&gt;&lt;br&gt;&acirc;€&cent; the essential virtues of strong fathers&acirc;€“and how to develop them &lt;br&gt;&acirc;€&cent; the cues daughters take from their dads on everything from self-respect to drugs, alcohol, and sex&lt;br&gt;&acirc;€&cent; the truth about ground rules (girls do want them, despite their protests)&lt;br&gt;&acirc;€&cent; the importance of becoming a hero to your daughter&lt;br&gt;&acirc;€&cent; the biggest mistake a dad can make&acirc;€“and the ramifications&lt;br&gt;&acirc;€&cent; the fact that girls actually depend on their dads&acirc;€™ guidance into adulthood&lt;br&gt;&acirc;€&cent; steps fathers can follow to help daughters avoid disastrous decisions and mistakes&lt;br&gt;&acirc;€&cent; ways in which&lt;i&gt; &lt;/i&gt;a father&acirc;€™s faith&acirc;€“or lack thereof&acirc;€“will influence his daughter&lt;br&gt;&acirc;€&cent; essential communication strategies for different stages of a girl&acirc;€™s life&lt;br&gt;&acirc;€&cent; true stories of &acirc;€œprodigal daughters&acirc;€&acirc;€“and how their fathers helped to bring them back &lt;br&gt;&lt;br&gt;Dads, you are far more powerful than you think&acirc;€“and if you follow Dr. Meeker&acirc;€™s advice, the rewards will be unmatched.&lt;br&gt;&lt;br&gt;&acirc;€œReassuring and challenging . . . a helpful road map for concerned fathers [that] tackles difficult issues.&acirc;€&lt;br&gt;&lt;i&gt;&acirc;€“National Review&lt;/i&gt;&lt;br&gt;&lt;br&gt;&acirc;€œA touching, illuminating book that will prove valuable to all of us who are fortunate enough to have been blessed with daughters.&acirc;€&lt;br&gt;&acirc;€“Michael Medved, nationally syndicated radio talk-show host, author of &lt;i&gt;Right Turns&lt;/i&gt;&lt;br&gt;&lt;br&gt;&acirc;€œDr. Meeker&acirc;€™s conclusions are timely, relevant, and often deeply moving. No one interested in what girls experience growing up in our culture today&acirc;€“and the impact that parents, especially fathers, have on the experience&acirc;€“can afford to miss reading this book.&acirc;€&lt;br&gt;&acirc;€“Armand M. Nicholi, Jr., M.D., professor of psychiatry, Harvard Medical School', '0345499395.jpg'),
 ('0345505476', 'The Paris Vendetta: A Novel', 26, 432, 'HARDCOVER', '2009-12-01', 'When Napoleon Bonaparte died in exile in 1821, he took to the grave a powerful secret. As general and emperor, he had stolen immeasurable riches from palaces, national treasuries, and even the Knights of Malta and the Vatican. In his final days, his British captors hoped to learn where the loot lay hidden. But he told them nothing, and in his will he made no mention of the treasure. Or did he?&lt;br&gt;&lt;br&gt;Former Justice Department operative Cotton Malone isn\'t looking for trouble when it comes knocking at his Copenhagen bookshop. Actually, it breaks and enters in the form of an American Secret Service agent with a pair of assassins on his heels. Malone has his doubts about the anxious young man, but narrowly surviving a ferocious firefight convinces him to follow his unexpected new ally.&lt;br&gt;&lt;br&gt;Their first stop is the secluded estate of Malone\'s good friend, Henrik Thorvaldsen. The wily Danish tycoon has uncovered the insidious plans of the Paris Club, a cabal of multimillionaires bent on manipulating the global economy. Only by matching wits with a terrorist-for-hire, foiling a catastrophic attack, and plunging into a desperate hunt for Napoleon\'s legendary lost treasure can Malone hope to avert international financial anarchy.&lt;br&gt;&lt;br&gt;But Thorvaldsen\'s real objective is much more personal: to avenge the murder of his son by the larcenous aristocrat at the heart of the conspiracy. Thorvaldsen\'s vendetta places Malone in an impossible quandary&acirc;€”one that forces him to choose between friend and country, past and present. Starting in Denmark, moving to England, and ending up in the storied streets and cathedrals of Paris, Malone plays a breathless game of duplicity and death, all to claim a prize of untold value. But at what cost?', '0345505476.jpg');
-INSERT INTO `tblBooks` (`isbn`, `title`, `price`, `pages`, `binding`, `pubDate`, `description`, `imageFilename`) VALUES
+INSERT INTO `tblbooks` (`isbn`, `title`, `price`, `pages`, `binding`, `pubDate`, `description`, `imageFilename`) VALUES
 ('0345518756', 'How to Sew a Button: And Other Nifty Things Your Grandmother Knew', 15, 304, 'PAPERBACK', '2009-12-15', '&acirc;€œWaste not, want not&acirc;€ with this guide to saving money, taking heart, and enjoying the simple pleasures of life.&lt;br&gt;&lt;br&gt;Nowadays, many of us &acirc;€œoutsource&acirc;€ basic tasks. Food is instant, ready-made, and processed with unhealthy additives. Dry cleaners press shirts, delivery guys bring pizza, gardeners tend flowers, and, yes, tailors sew on those pesky buttons. But life can be much simpler, sweeter, and richer&acirc;€“and a lot more fun, too! As your grandmother might say, now is not the time to be careless with your money, and it actually pays to learn how to do things yourself!&lt;br&gt;&lt;br&gt;Practical and empowering, &lt;b&gt;How to Sew a Button&lt;/b&gt; collects the treasured wisdom of nanas, bubbies, and grandmas from all across the country&acirc;€“as well as modern-day experts&acirc;€“and shares more than one hundred step-by-step essential tips for cooking, cleaning, gardening, and entertaining, including how to&lt;br&gt;&lt;br&gt;&acirc;€&cent; polish your image by shining your own shoes&lt;br&gt;&acirc;€&cent; grow your own vegetables (and stash your bounty for the winter)&lt;br&gt;&acirc;€&cent; sweeten your day by making your own jam&lt;br&gt;&acirc;€&cent; use baking soda and vinegar to clean your house without toxic chemicals&lt;br&gt;&acirc;€&cent; feel beautiful by perfecting your posture&lt;br&gt;&acirc;€&cent; roll your own piecrust and find a slice of heaven&lt;br&gt;&acirc;€&cent; fold a fitted sheet to crisp perfection&lt;br&gt;&acirc;€&cent; waltz without stepping on any toes&lt;br&gt;&lt;br&gt;Complete with helpful illustrations and brimming with nostalgic charm, &lt;b&gt;How to Sew a Button &lt;/b&gt;provides calm and comfort in uncertain times. By doing things yourself, with care and attention, you and your loved ones will feel the pleasing rewards of a job well done.', '0345518756.jpg'),
 ('0374527008', 'Indivisible by Four: A String Quartet in Pursuit of Harmony', 16, 320, 'PAPERBACK', '2000-06-15', 'The Guarneri Quartet is fabled for its unique longevity and high-spirited virtuosity. Here is its story from the inside--a story filled with drama, humor, danger, compassion, and, of course, glorious music.&lt;br&gt;&lt;br&gt;A player who studies and performs the exalted string-quartet repertoire has opted for a very special life. Arnold Steinhardt, tracing his own development as a student, orchestra player, and budding young soloist, gives a touching account of how he and his intrepid colleagues were converted to chamber music despite the daunting odds against success. And he reveals, as no one has before, the intensely difficult process by which--on the battlefield of daily three-hour rehearsals--four individualists master and then overcome the confining demands of ensemble playing. &lt;br&gt;', '0374527008.jpg'),
 ('0375406956', 'My Name Is Red', 26.95, 448, 'HARDCOVER', '2001-08-28', 'From one of the most important and acclaimed writers at work today, a thrilling new novel&acirc;€”part murder mystery, part love story&acirc;€”set amid the perils of religious repression in sixteenth-century Istanbul.&lt;br&gt;&lt;br&gt;When the Sultan commissions a great book to celebrate his royal self and his extensive dominion, he directs Enishte Effendi to assemble a cadre of the most acclaimed artists in the land. Their task: to illuminate the work in the European style. But because figurative art can be deemed an affront to Islam, this commission is a dangerous proposition indeed, and no one in the elite circle can know the full scope or nature of the project. &lt;br&gt;Panic erupts when one of the chosen miniaturists disappears, and the Sultan demands answers within three days. The only clue to the mystery&acirc;€”or crime?&acirc;€”lies in the half-finished illuminations themselves. Has an avenging angel discovered the blasphemous work? Or is a jealous contender for the hand of Enishte&acirc;€™s ravishing daughter, the incomparable Shekure, somehow to blame?&lt;br&gt;&lt;br&gt;Orhan Pamuk&acirc;€™s &lt;i&gt;My Name Is Red&lt;/i&gt; is at once a fantasy and a philosophical puzzle, a kaleidoscopic journey to the intersection of art, religion, love, sex, and power.', '0375406956.jpg'),
@@ -226,7 +233,7 @@ INSERT INTO `tblBooks` (`isbn`, `title`, `price`, `pages`, `binding`, `pubDate`,
 ('0684833395', 'Catch-22', 16, 464, 'PAPERBACK', '1996-09-04', '&lt;P&gt; &lt;I&gt;Catch-22&lt;/I&gt; is like no other novel. It is one of the funniest books ever written, a keystone work in American literature, and even added a new term to the dictionary. &lt;P&gt; At the heart of &lt;I&gt;Catch-22&lt;/I&gt; resides the incomparable, malingering bombardier, Yossarian, a hero endlessly inventive in his schemes to save his skin from the horrible chances of war. His efforts are perfectly understandable because as he furiously scrambles, thousands of people he hasn\'t even met are trying to kill him. His problem is Colonel Cathcart, who keeps raising the number of missions the men must fly to complete their service. Yet if Yossarian makes any attempts to excuse himself from the perilous missions that he is committed to flying, he is trapped by the Great Loyalty Oath Crusade, the hilariously sinister bureaucratic rule from which the book takes its title: a man is considered insane if he willingly continues to fly dangerous combat missions, but if he makes the necessary formal request to be relieved of such missions, the very act of making the request proves that he is sane and therefore ineligible to be relieved. &lt;P&gt; &lt;I&gt;Catch-22&lt;/I&gt; is a microcosm of the twentieth-century world as it might look to some one dangerously sane -- a masterpiece of our time.', '0684833395.jpg'),
 ('0688107826', 'The Adventures of Sherlock Holmes (Books of Wonder)', 27.99, 352, 'HARDCOVER', '1992-09-21', '&lt;P&gt;The extraordinary adventures of the world-famous detective Sherlock Holmes, as faithfully recounted by his comrade, Dr. Watson, have captivated readers of all ages for over a century. The stories\' blend of heartpounding, fast-paced action and mind-boggling deductive reasoning is as riveting today as it was when first published.&lt;/P&gt;&lt;P&gt;This deluxe illustrated edition contains Sir Arthur Conan Doyle\'s first twelve stories and includes such famous cases as \"The Red-headed League,\" in which Holmes uncovers a well-concealed, devilishly clever criminal plot; \"The Adventure of the Blue Carbuncle,\" in which Holmes must trap a jewel thief--with astonishing results; \"The Adventure of the Speckled Band,\" in which Holmes and Watson find themselves dealing with treachery, violence, and deadly snakes; and nine more equally thrilling and puzzling mysteries.&lt;/P&gt;&lt;P&gt;Magnificently illustrated with twelve powerful watercolors by award-winning artist Barry Moser, &lt;I&gt;The Adventures of Sherlock Holmes&lt;/I&gt; features the complete text of the original collection of Doyle\'s short stories and is an ideal introduction to the fascinating world of this mesmerizing detective.&lt;/P&gt;', '0688107826.jpg'),
 ('0691140200', 'The Mathematical Mechanic: Using Physical Reasoning to Solve Problems', 19.95, 196, 'HARDCOVER', '2009-07-26', '&lt;p&gt;Everybody knows that mathematics is indispensable to physics--imagine where we\'d be today if Einstein and Newton didn\'t have the math to back up their ideas. But how many people realize that physics can be used to produce many astonishing and strikingly elegant solutions in mathematics? Mark Levi shows how in this delightful book, treating readers to a host of entertaining problems and mind-bending puzzlers that will amuse and inspire their inner physicist.&lt;/p&gt;&lt;p&gt; Levi turns math and physics upside down, revealing how physics can simplify proofs and lead to quicker solutions and new theorems, and how physical solutions can illustrate why results are true in ways lengthy mathematical calculations never can. Did you know it\'s possible to derive the Pythagorean theorem by spinning a fish tank filled with water? Or that soap film holds the key to determining the cheapest container for a given volume? Or that the line of best fit for a data set can be found using a mechanical contraption made from a rod and springs? Levi demonstrates how to use physical intuition to solve these and other fascinating math problems. More than half the problems can be tackled by anyone with precalculus and basic geometry, while the more challenging problems require some calculus. This one-of-a-kind book explains physics and math concepts where needed, and includes an informative appendix of physical principles.&lt;/p&gt;&lt;p&gt; &lt;i&gt;The Mathematical Mechanic&lt;/i&gt; will appeal to anyone interested in the little-known connections between mathematics and physics and how both endeavors relate to the world around us.&lt;/p&gt;', '0691140200.jpg');
-INSERT INTO `tblBooks` (`isbn`, `title`, `price`, `pages`, `binding`, `pubDate`, `description`, `imageFilename`) VALUES
+INSERT INTO `tblbooks` (`isbn`, `title`, `price`, `pages`, `binding`, `pubDate`, `description`, `imageFilename`) VALUES
 ('0696225654', 'Better Homes and Gardens New Cook Book (Better Homes &amp; Gardens Plaid)', 19.95, 656, 'PAPERBACK', '2006-09-19', '&lt;ul&gt;      &lt;li&gt;Completely revised and updated with a fresh new design.      &lt;li&gt;More than 1,400 recipes&acirc;€”tested and perfected in the Better Homes and Gardens Test Kitchen--including 400+ quick and easy ones.      &lt;li&gt;All-new 20-Minute chapter, which includes more than 45 fast meal solutions.      &lt;li&gt;More recipes on your favorite topics: Cookies, Desserts, Grilling and Slow Cooker. Plus, the Grilling chapter now features recipes for the turkey fryer and more recipes for the smoke cooker.      &lt;li&gt;At-a-glance icons identify Easy, Fast, Low-Fat, Fat-Free, Whole Grain, Vegetarian, and Favorite recipes.      &lt;li&gt;Simple menu ideas featured in every main-dish chapter.      &lt;li&gt;Updated Cooking Basics chapter includes need-to-know kitchen survival advice including food safety, make-ahead cooking, must-have timesaving kitchen gadgets and emergency substitution charts.      &lt;li&gt;Essential need-to-know information now conveniently located at the front of each chapter for easy reference helps ensure cooking success.      &lt;li&gt;More than 800 full-color photos of finished dishes, how-to demonstrations and food IDs.      &lt;li&gt;Hundreds of hints and tips, plus easy-to-read cooking charts.      &lt;li&gt;&lt;b&gt;Bonus Material:&lt;/b&gt; Exclusive to cookbook buyers, an online menu component offers hundreds of menu ideas and more than 75 bonus recipes.      &lt;/ul&gt;', '0696225654.jpg'),
 ('0740748475', 'The Complete Calvin and Hobbes (Calvin &amp; Hobbes) (v. 1, 2, 3)', 150, 1440, 'HARDCOVER', '2005-10-04', '&lt;I&gt;New York Times&lt;/i&gt; best-seller!&lt;P&gt;Watterson\'s imaginative approach to his material and his inventive graphics have made &lt;I&gt;Calvin and Hobbes&lt;/i&gt; one of the few universally admired by other cartoonists.\" --Charles Solomon, &lt;I&gt;Los Angeles Times Book Review&lt;/i&gt;&lt;P&gt;&lt;I&gt;Calvin and Hobbes&lt;/i&gt; is unquestionably one of the most popular comic strips of all time. The imaginative world of a boy and his real-only-to-him tiger was first syndicated in 1985 and appeared in more than 2,400 newspapers when Bill Watterson retired on January 1, 1996. The entire body of &lt;I&gt;Calvin and Hobbes&lt;/i&gt; cartoons published in a truly noteworthy tribute to this singular cartoon in &lt;I&gt;The Complete Calvin and Hobbes&lt;/i&gt;. Composed of three hardcover, four-color volumes in a sturdy slipcase, this edition includes all &lt;I&gt;Calvin and Hobbes&lt;/i&gt; cartoons that ever appeared in syndication. This is the treasure that all &lt;I&gt;Calvin and Hobbes&lt;/i&gt; fans seek.', '0740748475.jpg'),
 ('0740785486', 'Celebrating Peanuts: 60 Years', 75, 544, 'HARDCOVER', '2009-11-15', 'Sixty years of &lt;I&gt;Peanuts&lt;/i&gt;, generations of fans, a gang of beloved characters, but only one creator: the legend, Charles M. Schulz.&lt;P&gt;Andrews McMeel is proud to showcase the exclusive &lt;I&gt;Celebrating Peanuts: 60 Years&lt;/i&gt;. It is packed with commentary from throughout Schulz\'s career, making this book not only a heartwarming tribute but also a true collector\'s item.&lt;P&gt;This special 60th anniversary tribute is arranged decade, to spotlight the highlights and development of this world favorite classic.', '0740785486.jpg'),
@@ -259,7 +266,7 @@ INSERT INTO `tblBooks` (`isbn`, `title`, `price`, `pages`, `binding`, `pubDate`,
 ('1416580867', 'Letters of Vincent van Gogh', 15, 352, 'PAPERBACK', '2008-11-18', '&lt;b&gt;&lt;big&gt;&lt;p align=\"center\"&gt;A literary classic, &lt;I&gt;The Letters of Vincent van Gogh Captures&lt;/i&gt; the voice of one of the most beloved and important artists of all time.&lt;/big&gt;&lt;/b&gt;&lt;P&gt;Though Vincent van Gogh is often thought of as a mad genius, in &lt;I&gt;The Letters of Vincent van Gogh&lt;/i&gt; the thoughtful, effervescent, and sensitive man is revealed to readers through his own voice.&lt;P&gt;This collection of letters, arranged in chronological order and written to Vincent\'s closest confidant, his brother and art dealer, Theo, provide a riveting narrative of van Gogh\'s life. The letters expose Vincent\'s creative process; his joy and inspiration derived from literature, Japanese art, and nature; as well as his many romantic disappointments and constant poverty. Also documented are Vincent\'s close relationships with fellow artists, especially Paul Gauguin. Van Gogh\'s tender and often ebullient letters provide a sharp contrast to the devastating and frequently violent mental breakdowns that plagued and eventually destroyed him.&lt;P&gt;Collected and edited by art historian Mark Roskill, this volume also includes a chronology, a short memoir by van Gogh\'s sister-in-law that fills in many of the blanks of Vincent\'s early years, and reproductions of selected artwork discussed in van Gogh\'s letters.&lt;P&gt;An epistolary classic, &lt;I&gt;The Letters of Vincent van Gogh&lt;/i&gt; is not just an important historical collection but also a captivating treasure.', '1416580867.jpg'),
 ('1416580948', 'Kiss Of A Demon King (Immortals After Dark, Book 7)', 7.99, 432, '', '2009-01-20', 'From &lt;I&gt;New York Times&lt;/i&gt; bestselling author Kresley Cole comes this spellbinding story of a demon king trapped by an enchantress for her wanton purposes -- and the scorching aftermath that follows when he turns the tables and claims her as his captive.&lt;P&gt;&lt;b&gt;HIS OBSESSION...&lt;/b&gt;&lt;P&gt;Sabine, Sorceress of Illusions: the evil beauty who surrenders her body, but not her heart.&lt;P&gt;&lt;b&gt;HER DOWNFALL...&lt;/b&gt;&lt;P&gt;Rydstrom Woede: the ruthless warrior who vows to keep her at all costs.&lt;P&gt;&lt;b&gt;THEY WERE NEVER SUPPOSED TO WANT EACH OTHER THIS MUCH...&lt;/b&gt;&lt;P&gt;With each smoldering encounter, their shared hunger only increases. If they can defeat the sinister enemy that stands between them, will Sabine make the ultimate sacrifice for her demon? Or will the proud king lay down his crown and arms to save his sorceress?', '1416580948.jpg'),
 ('1426201257', 'Journeys of a Lifetime: 500 of the World\'s Greatest Trips', 40, 400, 'HARDCOVER', '2007-10-16', 'No one knows the world like National Geographic&acirc;€”and in this lavish volume, we reveal our picks for the world\'s most fabulous journeys, along with helpful information for readers who want to try them out. &lt;br&gt;&lt;br&gt;Compiled from the favorite trips of National Geographic\'s travel writers, &lt;i&gt;Journeys of a Lifetime&lt;/i&gt; spans the globe to highlight the best of the world\'s most famous and lesser known sojourns. It presents an incredible diversity of possibilities, from ocean cruises around Antarctica to horse treks in the Andes. Every continent and every possible form of transport is covered. &lt;br&gt;&lt;br&gt;A timely resource for the burgeoning ranks of active travelers who crave adventurous and far-flung trips, &lt;i&gt;Journeys of a Lifetime&lt;/i&gt; provides scores of creative ideas: trekking the heights of Mt. Kilimanjaro in Tanzania... mountain biking in Transylvania... driving through the scenic highlands of Scotland... or rolling through the outback on Australia\'s famous Ghan train... and dozens of other intriguing options all over the world. &lt;br&gt;&lt;br&gt;&lt;i&gt;Journeys of a Lifetime&lt;/i&gt; also features 22 fun Top 10 lists in all sorts of categories. What are the world\'s top 10 elevator rides, bridges to walk across, trolley rides, ancient highways, or underground walking adventures? Readers will love evaluating and debating the selections. &lt;br&gt;&lt;br&gt;Each chapter showcases stunning photography, full-color maps, evocative text, and expert advice&acirc;€”including how to get there, when to visit, and how to make the most of the journey&acirc;€”all packaged in a luxurious oversize volume to treasure for years to come.', '1426201257.jpg');
-INSERT INTO `tblBooks` (`isbn`, `title`, `price`, `pages`, `binding`, `pubDate`, `description`, `imageFilename`) VALUES
+INSERT INTO `tblbooks` (`isbn`, `title`, `price`, `pages`, `binding`, `pubDate`, `description`, `imageFilename`) VALUES
 ('1433805618', 'Publication Manual of the American Psychological Association, Sixth Edition', 28.95, 272, 'PAPERBACK', '0000-00-00', 'The Publication Manual of the American Psychological Association\" is the style manual of choice for writers, editors, students, and educators in the social and behavioral sciences. It provides invaluable guidance on all aspects of the writing process, from the ethics of authorship to the word choice that best reduces bias in language. Well-known for its authoritative and easy-to-use reference and citation system, the Publication Manual also offers guidance on choosing the headings, tables, figures, and tone that will result in strong, simple, and elegant scientific communication. The sixth edition offers new and expanded instruction on publication ethics, statistics, journal article reporting standards, electronic reference formats, and the construction of tables and figures. The sixth edition has been revised and updated to include: new ethics guidance on such topics as determining authorship and terms of collaboration, duplicate publication, plagiarism and self-plagiarism, disguising of participants, validity of instrumentation, and making data available to others for verification; new journal article reporting standards to help readers report empirical research with clarity and precision; simplified APA heading style to make it more conducive to electronic publication; updated guidelines for reducing bias in language to reflect current practices and preferences, including a new section on presenting historical language that is inappropriate by present standards; new guidelines for reporting inferential statistics and a significantly revised table of statistical abbreviations; and, new instruction on using supplemental files containing lengthy data sets and other media. This book includes significantly expanded content on the electronic presentation of data to help readers understand the purpose of each kind of display and choose the best match for communicating the results of the investigation, with new examples for a variety of data displays, including electro physiological and biological data. It offers consolidated information on all aspects of reference citations, with an expanded discussion of electronic sources emphasizing the role of the digital object identifier (DOI) as a reliable way to locate information. It features expanded discussion of the publication process, including the function and process of peer review. It contains a discussion of ethical, legal, and policy requirements in publication; and guidelines on working with the publisher while the article is in press. Key to this edition of the Publication Manual is an updated and expanded Web presence. Look up additional supplemental material keyed to this book. This book lets you test your knowledge of APA Style with a free tutorial on style basics. It lets you learn about the changes in the sixth edition with a free tutorial reviewing key revisions. Sign up for an on-line course to enrich and enhance your understanding of APA Style. Read the APA Style blog and share your comments on writing and referencing. Consult frequently asked questions to sharpen your understanding of APA Style. This title lets you examine additional resources on such topics as ethics, statistics, and writing. It lets you familiarize yourself with submission standards for APA books and journals.  ', '1433805618.jpg'),
 ('1436335205', 'Those Crazy Germans! A Lighthearted Guide to Germany', 15.99, 108, 'PAPERBACK', '2008-07-14', '&lt;b&gt;Those Crazy Germans!&lt;/b&gt; gives you the inside scoop on the people and the culture so you can get the most out of your trip to Germany. Go beyond the stereotypes and get in touch with the Germans you never knew existed. Filled with practical travel tips and cultural insights, you\'ll travel Germany like a pro.\" &lt;P&gt;* Do you want to learn the history of a town or city without knowing anything more than its name?&lt;br&gt; * Do you want to know the tricks to navigating Germany\'s Autobahns and railways so you travel like a native?&lt;br&gt; * Do you want to know Germans\' secrets for relaxation that you can easily and affordably enjoy as well?&lt;br&gt; * Do you want to learn about German beers and wines so you can order like a connoisseur? &lt;P&gt;&lt;b&gt;Those Crazy Germans!&lt;/b&gt; takes you where the other travel guides don\'t go. Through a combination of observations, tips and historical &amp; cultural insights all written in a relaxed and cheerful style, this book takes you behind the scenes and introduces you to the Germany that the Germans know. Perfect for reading on the plane or train, &lt;b&gt;Those Crazy Germans!&lt;/b&gt; is the fun way to get to know Germany. &lt;P&gt;* Learn how hundreds of years of traditions manifest themselves in modern day Germany.&lt;br&gt; * Learn the customs and quirks of German restaurants and hotels.&lt;br&gt; * Learn the insiders\' tips to Oktoberfest, Karneval and hundreds of other festivals so that you too can party like a native.&lt;br&gt; * Learn about Germany\'s unusual do\'s and don\'ts.&lt;br&gt; * Learn how to see towns and cities the way the Germans see them. &lt;P&gt;Most travel guides give you the necessary \"go here, see this\", \"eat here, stay there\" details, but are short on insight and cultural knowledge. &lt;b&gt;Those Crazy Germans!&lt;/b&gt; bridges the gap by providing the essential and often unknown cultural insights and perspective that lets you truly experience the people and the country.', '1436335205.jpg'),
 ('1439101167', 'Dangerously Funny: The Uncensored Story of \"The Smothers Brothers Comedy Hour\"', 24.99, 400, 'HARDCOVER', '2009-12-01', '&lt;b&gt;A behind-the-scenes look at the rise and fall of &lt;I&gt;The Smothers Brothers Comedy Hour&lt;/i&gt; -- the provocative, politically charged program that shocked the censors, outraged the White House, and forever changed the face of television. &lt;/b&gt;&lt;P&gt;Decades before &lt;I&gt;The Daily Show&lt;/i&gt;, &lt;I&gt;The Smothers Brothers Comedy Hour&lt;/i&gt; proved there was a place on television for no-holds-barred political comedy with a decidedly antiauthoritarian point of view. In this explosive, revealing history of the show, veteran entertainment journalist David Bianculli tells the fascinating story of its three-year network run -- and the cultural impact that\'s still being felt today. &lt;P&gt;Before it was suddenly removed from the CBS lineup (reportedly under pressure from the Nixon administration), &lt;I&gt;The Smothers Brothers Comedy Hour&lt;/i&gt; was a ratings powerhouse. It helped launch the careers of comedy legends such as Steve Martin and Rob Reiner, featured groundbreaking musical acts like the Beatles and the Who, and served as a cultural touchstone for the antiwar movement of the late 1960s. &lt;P&gt;Drawing on extensive original interviews with Tom and Dick Smothers and dozens of other key players -- as well as more than a decade\'s worth of original research --&lt;I&gt; Dangerously Funny&lt;/i&gt; brings readers behind the scenes for all the battles over censorship, mind-blowing musical performances, and unforgettable sketches that defined the show and its era. &lt;P&gt;David Bianculli delves deep into this riveting story, to find out what &lt;I&gt;really&lt;/i&gt; happened and to reveal why this show remains so significant to this day.', '1439101167.jpg'),
@@ -285,19 +292,19 @@ INSERT INTO `tblBooks` (`isbn`, `title`, `price`, `pages`, `binding`, `pubDate`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblBooksAuthorsXref`
+-- Table structure for table `tblbooksauthorsxref`
 --
 
-CREATE TABLE `tblBooksAuthorsXref` (
+CREATE TABLE `tblbooksauthorsxref` (
   `isbn` char(16) NOT NULL,
   `authorId` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tblBooksAuthorsXref`
+-- Dumping data for table `tblbooksauthorsxref`
 --
 
-INSERT INTO `tblBooksAuthorsXref` (`isbn`, `authorId`) VALUES
+INSERT INTO `tblbooksauthorsxref` (`isbn`, `authorId`) VALUES
 ('1400064996', 1),
 ('0880800143', 2),
 ('0375705244', 3),
@@ -410,19 +417,19 @@ INSERT INTO `tblBooksAuthorsXref` (`isbn`, `authorId`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblBooksGenresXref`
+-- Table structure for table `tblbooksgenresxref`
 --
 
-CREATE TABLE `tblBooksGenresXref` (
+CREATE TABLE `tblbooksgenresxref` (
   `isbn` char(16) NOT NULL,
   `genreId` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tblBooksGenresXref`
+-- Dumping data for table `tblbooksgenresxref`
 --
 
-INSERT INTO `tblBooksGenresXref` (`isbn`, `genreId`) VALUES
+INSERT INTO `tblbooksgenresxref` (`isbn`, `genreId`) VALUES
 ('0446391387', 1),
 ('0810983362', 1),
 ('0821219103', 1),
@@ -541,19 +548,19 @@ INSERT INTO `tblBooksGenresXref` (`isbn`, `genreId`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblBooksPublishersXref`
+-- Table structure for table `tblbookspublishersxref`
 --
 
-CREATE TABLE `tblBooksPublishersXref` (
+CREATE TABLE `tblbookspublishersxref` (
   `isbn` char(16) NOT NULL,
   `publisherId` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tblBooksPublishersXref`
+-- Dumping data for table `tblbookspublishersxref`
 --
 
-INSERT INTO `tblBooksPublishersXref` (`isbn`, `publisherId`) VALUES
+INSERT INTO `tblbookspublishersxref` (`isbn`, `publisherId`) VALUES
 ('1400064996', 1),
 ('0880800143', 2),
 ('0375705244', 3),
@@ -672,19 +679,19 @@ INSERT INTO `tblBooksPublishersXref` (`isbn`, `publisherId`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblGenres`
+-- Table structure for table `tblgenres`
 --
 
-CREATE TABLE `tblGenres` (
+CREATE TABLE `tblgenres` (
   `genreId` int(10) UNSIGNED NOT NULL,
   `genreName` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tblGenres`
+-- Dumping data for table `tblgenres`
 --
 
-INSERT INTO `tblGenres` (`genreId`, `genreName`) VALUES
+INSERT INTO `tblgenres` (`genreId`, `genreName`) VALUES
 (1, 'Arts & Photography'),
 (2, 'Biographies & Memoirs'),
 (3, 'Business & Investing'),
@@ -712,19 +719,19 @@ INSERT INTO `tblGenres` (`genreId`, `genreName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblPublishers`
+-- Table structure for table `tblpublishers`
 --
 
-CREATE TABLE `tblPublishers` (
+CREATE TABLE `tblpublishers` (
   `publisherId` int(10) UNSIGNED NOT NULL,
   `fullName` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tblPublishers`
+-- Dumping data for table `tblpublishers`
 --
 
-INSERT INTO `tblPublishers` (`publisherId`, `fullName`) VALUES
+INSERT INTO `tblpublishers` (`publisherId`, `fullName`) VALUES
 (1, 'Random House'),
 (2, 'National Center for Constitutional Studies'),
 (3, 'Vintage'),
@@ -820,42 +827,47 @@ INSERT INTO `tblPublishers` (`publisherId`, `fullName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblUser`
+-- Table structure for table `tbluser`
 --
 
-CREATE TABLE `tblUser` (
+CREATE TABLE `tbluser` (
   `name` varchar(50) NOT NULL,
   `pass` varchar(64) NOT NULL,
   `email` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tblUser`
+-- Dumping data for table `tbluser`
 --
 
-INSERT INTO `tblUser` (`name`, `pass`, `email`) VALUES
-('Alex', '123456', 'ajvanbeekum@gmail.com'),
-('alex', '123456', 'ajvanbeekum@yahoo.com'),
-('anja', '234567', 'anja@gmail.com');
+INSERT INTO `tbluser` (`name`, `pass`, `email`) VALUES
+('Root', '123456', 'root@gmail.com');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblUserCartXref`
+-- Table structure for table `tblusercartxref`
 --
 
-CREATE TABLE `tblUserCartXref` (
+CREATE TABLE `tblusercartxref` (
   `email` varchar(225) NOT NULL,
   `isbn` char(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `tblusercartxref`
+--
+
+INSERT INTO `tblusercartxref` (`email`, `isbn`) VALUES
+('root@gmail.com', '1854377884');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblUserWishXref`
+-- Table structure for table `tbluserwishxref`
 --
 
-CREATE TABLE `tblUserWishXref` (
+CREATE TABLE `tbluserwishxref` (
   `email` varchar(225) NOT NULL,
   `isbn` char(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -865,67 +877,67 @@ CREATE TABLE `tblUserWishXref` (
 --
 
 --
--- Indexes for table `tblAuthors`
+-- Indexes for table `tblauthors`
 --
-ALTER TABLE `tblAuthors`
+ALTER TABLE `tblauthors`
   ADD PRIMARY KEY (`authorId`);
 
 --
--- Indexes for table `tblBooks`
+-- Indexes for table `tblbooks`
 --
-ALTER TABLE `tblBooks`
+ALTER TABLE `tblbooks`
   ADD PRIMARY KEY (`isbn`);
 
 --
--- Indexes for table `tblBooksAuthorsXref`
+-- Indexes for table `tblbooksauthorsxref`
 --
-ALTER TABLE `tblBooksAuthorsXref`
+ALTER TABLE `tblbooksauthorsxref`
   ADD PRIMARY KEY (`isbn`,`authorId`),
   ADD KEY `authorId` (`authorId`);
 
 --
--- Indexes for table `tblBooksGenresXref`
+-- Indexes for table `tblbooksgenresxref`
 --
-ALTER TABLE `tblBooksGenresXref`
+ALTER TABLE `tblbooksgenresxref`
   ADD PRIMARY KEY (`isbn`,`genreId`),
   ADD KEY `genreId` (`genreId`);
 
 --
--- Indexes for table `tblBooksPublishersXref`
+-- Indexes for table `tblbookspublishersxref`
 --
-ALTER TABLE `tblBooksPublishersXref`
+ALTER TABLE `tblbookspublishersxref`
   ADD PRIMARY KEY (`isbn`,`publisherId`),
   ADD KEY `publisherId` (`publisherId`);
 
 --
--- Indexes for table `tblGenres`
+-- Indexes for table `tblgenres`
 --
-ALTER TABLE `tblGenres`
+ALTER TABLE `tblgenres`
   ADD PRIMARY KEY (`genreId`);
 
 --
--- Indexes for table `tblPublishers`
+-- Indexes for table `tblpublishers`
 --
-ALTER TABLE `tblPublishers`
+ALTER TABLE `tblpublishers`
   ADD PRIMARY KEY (`publisherId`);
 
 --
--- Indexes for table `tblUser`
+-- Indexes for table `tbluser`
 --
-ALTER TABLE `tblUser`
+ALTER TABLE `tbluser`
   ADD PRIMARY KEY (`email`);
 
 --
--- Indexes for table `tblUserCartXref`
+-- Indexes for table `tblusercartxref`
 --
-ALTER TABLE `tblUserCartXref`
+ALTER TABLE `tblusercartxref`
   ADD PRIMARY KEY (`email`,`isbn`),
   ADD KEY `isbn` (`isbn`);
 
 --
--- Indexes for table `tblUserWishXref`
+-- Indexes for table `tbluserwishxref`
 --
-ALTER TABLE `tblUserWishXref`
+ALTER TABLE `tbluserwishxref`
   ADD PRIMARY KEY (`email`,`isbn`),
   ADD KEY `isbn` (`isbn`);
 
@@ -934,15 +946,15 @@ ALTER TABLE `tblUserWishXref`
 --
 
 --
--- AUTO_INCREMENT for table `tblAuthors`
+-- AUTO_INCREMENT for table `tblauthors`
 --
-ALTER TABLE `tblAuthors`
+ALTER TABLE `tblauthors`
   MODIFY `authorId` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
--- AUTO_INCREMENT for table `tblPublishers`
+-- AUTO_INCREMENT for table `tblpublishers`
 --
-ALTER TABLE `tblPublishers`
+ALTER TABLE `tblpublishers`
   MODIFY `publisherId` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
@@ -950,37 +962,41 @@ ALTER TABLE `tblPublishers`
 --
 
 --
--- Constraints for table `tblBooksAuthorsXref`
+-- Constraints for table `tblbooksauthorsxref`
 --
-ALTER TABLE `tblBooksAuthorsXref`
-  ADD CONSTRAINT `tblbooksauthorsxref_ibfk_1` FOREIGN KEY (`isbn`) REFERENCES `tblBooks` (`isbn`),
-  ADD CONSTRAINT `tblbooksauthorsxref_ibfk_2` FOREIGN KEY (`authorId`) REFERENCES `tblAuthors` (`authorId`);
+ALTER TABLE `tblbooksauthorsxref`
+  ADD CONSTRAINT `tblbooksauthorsxref_ibfk_1` FOREIGN KEY (`isbn`) REFERENCES `tblbooks` (`isbn`),
+  ADD CONSTRAINT `tblbooksauthorsxref_ibfk_2` FOREIGN KEY (`authorId`) REFERENCES `tblauthors` (`authorId`);
 
 --
--- Constraints for table `tblBooksGenresXref`
+-- Constraints for table `tblbooksgenresxref`
 --
-ALTER TABLE `tblBooksGenresXref`
-  ADD CONSTRAINT `tblbooksgenresxref_ibfk_1` FOREIGN KEY (`isbn`) REFERENCES `tblBooks` (`isbn`),
-  ADD CONSTRAINT `tblbooksgenresxref_ibfk_2` FOREIGN KEY (`genreId`) REFERENCES `tblGenres` (`genreId`);
+ALTER TABLE `tblbooksgenresxref`
+  ADD CONSTRAINT `tblbooksgenresxref_ibfk_1` FOREIGN KEY (`isbn`) REFERENCES `tblbooks` (`isbn`),
+  ADD CONSTRAINT `tblbooksgenresxref_ibfk_2` FOREIGN KEY (`genreId`) REFERENCES `tblgenres` (`genreId`);
 
 --
--- Constraints for table `tblBooksPublishersXref`
+-- Constraints for table `tblbookspublishersxref`
 --
-ALTER TABLE `tblBooksPublishersXref`
-  ADD CONSTRAINT `tblbookspublishersxref_ibfk_1` FOREIGN KEY (`isbn`) REFERENCES `tblBooks` (`isbn`),
-  ADD CONSTRAINT `tblbookspublishersxref_ibfk_2` FOREIGN KEY (`publisherId`) REFERENCES `tblPublishers` (`publisherId`);
+ALTER TABLE `tblbookspublishersxref`
+  ADD CONSTRAINT `tblbookspublishersxref_ibfk_1` FOREIGN KEY (`isbn`) REFERENCES `tblbooks` (`isbn`),
+  ADD CONSTRAINT `tblbookspublishersxref_ibfk_2` FOREIGN KEY (`publisherId`) REFERENCES `tblpublishers` (`publisherId`);
 
 --
--- Constraints for table `tblUserCartXref`
+-- Constraints for table `tblusercartxref`
 --
-ALTER TABLE `tblUserCartXref`
-  ADD CONSTRAINT `tblusercartxref_ibfk_1` FOREIGN KEY (`email`) REFERENCES `tblUser` (`email`),
-  ADD CONSTRAINT `tblusercartxref_ibfk_2` FOREIGN KEY (`isbn`) REFERENCES `tblBooks` (`isbn`);
+ALTER TABLE `tblusercartxref`
+  ADD CONSTRAINT `tblusercartxref_ibfk_1` FOREIGN KEY (`email`) REFERENCES `tbluser` (`email`),
+  ADD CONSTRAINT `tblusercartxref_ibfk_2` FOREIGN KEY (`isbn`) REFERENCES `tblbooks` (`isbn`);
 
 --
--- Constraints for table `tblUserWishXref`
+-- Constraints for table `tbluserwishxref`
 --
-ALTER TABLE `tblUserWishXref`
-  ADD CONSTRAINT `tbluserwishxref_ibfk_1` FOREIGN KEY (`email`) REFERENCES `tblUser` (`email`),
-  ADD CONSTRAINT `tbluserwishxref_ibfk_2` FOREIGN KEY (`isbn`) REFERENCES `tblBooks` (`isbn`);
-SET FOREIGN_KEY_CHECKS=1;
+ALTER TABLE `tbluserwishxref`
+  ADD CONSTRAINT `tbluserwishxref_ibfk_1` FOREIGN KEY (`email`) REFERENCES `tbluser` (`email`),
+  ADD CONSTRAINT `tbluserwishxref_ibfk_2` FOREIGN KEY (`isbn`) REFERENCES `tblbooks` (`isbn`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

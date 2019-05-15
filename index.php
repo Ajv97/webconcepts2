@@ -15,7 +15,17 @@ unset($_SESSION['cart']);
 
     <body>
         <div class="inner">
-            <p class="account right"><?php
+            <form class="left" id="searchBar" method="post" action="books.php">
+                <input class="left" type="text" name="muse" id="search"/>
+                <select class="left" id="searchOptions" name="category" size="1">
+                    <option selected>Title</option>
+                    <option>Author</option>
+                    <option>Isbn</option>
+                </select>
+                <input class="left" type="submit" id="searchButton" value="SEARCH"/>
+            </form>
+
+            <p class="right"><?php
                 if(!$_SESSION["name"]){
                     echo '<a class="login" href="login.html">Login</a>';
                 } else {

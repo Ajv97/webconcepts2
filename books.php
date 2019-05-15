@@ -14,47 +14,114 @@ session_start();
 unset($_SESSION['wish']);
 unset($_SESSION['cart']);
 $email = $_SESSION['email'];
-$queryString;
-if (!$email) {
-    if (!$genreId) {
-        $queryString = 'SELECT b.isbn, b.title, b.price, b.pubDate, b.imageFilename, a.compositeName FROM tblBooks b' .
-            ' LEFT JOIN tblBooksAuthorsXref bax on b.isbn = bax.isbn LEFT JOIN tblAuthors a on bax.authorId = a.authorId' .
-            ' ORDER BY title;';
 
+$search = $_POST['muse'];
+$searchOption = $_POST['category'];
+
+$queryString;
+if(!$search) {
+    if (!$email) {
+        if (!$genreId) {
+            $queryString = 'SELECT b.isbn, b.title, b.price, b.pubDate, b.imageFilename, a.compositeName FROM tblBooks b' .
+                ' LEFT JOIN tblBooksAuthorsXref bax on b.isbn = bax.isbn LEFT JOIN tblAuthors a on bax.authorId = a.authorId' .
+                ' ORDER BY title;';
+
+        } else {
+            $queryString = 'SELECT b.isbn, b.title, b.price, b.pubDate, b.imageFilename, a.compositeName, g.genreName FROM tblBooks b' .
+                ' LEFT JOIN tblBooksGenresXref bgx ON b.isbn = bgx.isbn LEFT JOIN tblGenres g ON g.genreId = bgx.genreId' .
+                ' LEFT JOIN tblBooksAuthorsXref bax on b.isbn = bax.isbn LEFT JOIN tblAuthors a on bax.authorId = a.authorId' .
+                " WHERE bgx.genreId = '$genreId' ORDER BY title;";
+        }
     } else {
-        $queryString = 'SELECT b.isbn, b.title, b.price, b.pubDate, b.imageFilename, a.compositeName, g.genreName FROM tblBooks b' .
-            ' LEFT JOIN tblBooksGenresXref bgx ON b.isbn = bgx.isbn LEFT JOIN tblGenres g ON g.genreId = bgx.genreId' .
-            ' LEFT JOIN tblBooksAuthorsXref bax on b.isbn = bax.isbn LEFT JOIN tblAuthors a on bax.authorId = a.authorId' .
-            " WHERE bgx.genreId = '$genreId' ORDER BY title;";
+        $queryString = 'CREATE TABLE FilteredUC(cemail varchar(225), isbn char(16), PRIMARY KEY(cemail, isbn));';
+        $myConn->set_query_string($queryString);
+        $result = $myConn->execute_query();
+
+        $queryString = 'CREATE TABLE FilteredUW(wemail varchar(225), isbn char(16), PRIMARY KEY(wemail, isbn));';
+        $myConn->set_query_string($queryString);
+        $result = $myConn->execute_query();
+
+        $queryString = "INSERT INTO FilteredUC (cemail, isbn) SELECT email, isbn FROM tblUserCartXref ucx WHERE ucx.email = '$email';";
+        $myConn->set_query_string($queryString);
+        $result = $myConn->execute_query();
+
+        $queryString = "INSERT INTO FilteredUW (wemail, isbn) SELECT email, isbn FROM tblUserWishXref uwx WHERE uwx.email = '$email';";
+        $myConn->set_query_string($queryString);
+        $result = $myConn->execute_query();
+
+        if (!$genreId) {
+            $queryString = 'SELECT b.isbn, b.title, b.price, b.pubDate, b.imageFilename, a.compositeName, fuc.cemail, fuw.wemail FROM tblBooks b' .
+                ' LEFT JOIN tblBooksAuthorsXref bax ON b.isbn = bax.isbn LEFT JOIN tblAuthors a ON bax.authorId = a.authorId' .
+                ' LEFT JOIN FilteredUC fuc ON fuc.isbn = b.isbn LEFT JOIN FilteredUW fuw ON fuw.isbn = b.isbn' .
+                ' ORDER BY title;';
+        } else {
+            $queryString = 'SELECT b.isbn, b.title, b.price, b.pubDate, b.imageFilename, a.compositeName, g.genreName, fuc.cemail, fuw.wemail FROM tblBooks b' .
+                ' LEFT JOIN tblBooksGenresXref bgx ON b.isbn = bgx.isbn LEFT JOIN tblGenres g ON g.genreId = bgx.genreId' .
+                ' LEFT JOIN tblBooksAuthorsXref bax ON b.isbn = bax.isbn LEFT JOIN tblAuthors a ON bax.authorId = a.authorId' .
+                ' LEFT JOIN FilteredUC fuc ON fuc.isbn = b.isbn LEFT JOIN FilteredUW fuw ON fuw.isbn = b.isbn' .
+                " WHERE bgx.genreId = '$genreId' ORDER BY title;";
+        }
     }
 } else {
-    $queryString = 'CREATE TABLE FilteredUC(cemail varchar(225), isbn char(16), PRIMARY KEY(cemail, isbn));';
-    $myConn->set_query_string($queryString);
-    $result = $myConn->execute_query();
+    if(!$email) {
+        switch ($searchOption) {
+            case "Title":
+                $queryString = 'SELECT b.isbn, b.title, b.price, b.pubDate, b.imageFilename, a.compositeName FROM tblBooks b' .
+                    ' LEFT JOIN tblBooksAuthorsXref bax on b.isbn = bax.isbn LEFT JOIN tblAuthors a on bax.authorId = a.authorId' .
+                    " WHERE b.title LIKE '%$search%' ORDER BY title;";
+                break;
 
-    $queryString = 'CREATE TABLE FilteredUW(wemail varchar(225), isbn char(16), PRIMARY KEY(wemail, isbn));';
-    $myConn->set_query_string($queryString);
-    $result = $myConn->execute_query();
+            case "Author":
+                $queryString = 'SELECT b.isbn, b.title, b.price, b.pubDate, b.imageFilename, a.compositeName FROM tblBooks b' .
+                    ' LEFT JOIN tblBooksAuthorsXref bax on b.isbn = bax.isbn LEFT JOIN tblAuthors a on bax.authorId = a.authorId' .
+                    " WHERE a.compositeName LIKE '%$search%' ORDER BY title;";
+                break;
 
-    $queryString = "INSERT INTO FilteredUC (cemail, isbn) SELECT email, isbn FROM tblUserCartXref ucx WHERE ucx.email = '$email';";
-    $myConn->set_query_string($queryString);
-    $result = $myConn->execute_query();
-
-    $queryString = "INSERT INTO FilteredUW (wemail, isbn) SELECT email, isbn FROM tblUserWishXref uwx WHERE uwx.email = '$email';";
-    $myConn->set_query_string($queryString);
-    $result = $myConn->execute_query();
-
-    if(!$genreId) {
-        $queryString = 'SELECT b.isbn, b.title, b.price, b.pubDate, b.imageFilename, a.compositeName, fuc.cemail, fuw.wemail FROM tblBooks b' .
-            ' LEFT JOIN tblBooksAuthorsXref bax ON b.isbn = bax.isbn LEFT JOIN tblAuthors a ON bax.authorId = a.authorId' .
-            ' LEFT JOIN FilteredUC fuc ON fuc.isbn = b.isbn LEFT JOIN FilteredUW fuw ON fuw.isbn = b.isbn' .
-            ' ORDER BY title;';
+            case "Isbn":
+                $queryString = 'SELECT b.isbn, b.title, b.price, b.pubDate, b.imageFilename, a.compositeName FROM tblBooks b' .
+                    ' LEFT JOIN tblBooksAuthorsXref bax on b.isbn = bax.isbn LEFT JOIN tblAuthors a on bax.authorId = a.authorId' .
+                    " WHERE b.isbn LIKE '%$search%' ORDER BY title;";
+                break;
+        }
     } else {
-        $queryString = 'SELECT b.isbn, b.title, b.price, b.pubDate, b.imageFilename, a.compositeName, g.genreName, fuc.cemail, fuw.wemail FROM tblBooks b' .
-            ' LEFT JOIN tblBooksGenresXref bgx ON b.isbn = bgx.isbn LEFT JOIN tblGenres g ON g.genreId = bgx.genreId' .
-            ' LEFT JOIN tblBooksAuthorsXref bax ON b.isbn = bax.isbn LEFT JOIN tblAuthors a ON bax.authorId = a.authorId' .
-            ' LEFT JOIN FilteredUC fuc ON fuc.isbn = b.isbn LEFT JOIN FilteredUW fuw ON fuw.isbn = b.isbn' .
-            " WHERE bgx.genreId = '$genreId' ORDER BY title;";
+        $queryString = 'CREATE TABLE FilteredUC(cemail varchar(225), isbn char(16), PRIMARY KEY(cemail, isbn));';
+        $myConn->set_query_string($queryString);
+        $result = $myConn->execute_query();
+
+        $queryString = 'CREATE TABLE FilteredUW(wemail varchar(225), isbn char(16), PRIMARY KEY(wemail, isbn));';
+        $myConn->set_query_string($queryString);
+        $result = $myConn->execute_query();
+
+        $queryString = "INSERT INTO FilteredUC (cemail, isbn) SELECT email, isbn FROM tblUserCartXref ucx WHERE ucx.email = '$email';";
+        $myConn->set_query_string($queryString);
+        $result = $myConn->execute_query();
+
+        $queryString = "INSERT INTO FilteredUW (wemail, isbn) SELECT email, isbn FROM tblUserWishXref uwx WHERE uwx.email = '$email';";
+        $myConn->set_query_string($queryString);
+        $result = $myConn->execute_query();
+
+        switch ($searchOption) {
+            case "Title":
+                $queryString = 'SELECT b.isbn, b.title, b.price, b.pubDate, b.imageFilename, a.compositeName, fuc.cemail, fuw.wemail FROM tblBooks b' .
+                    ' LEFT JOIN tblBooksAuthorsXref bax ON b.isbn = bax.isbn LEFT JOIN tblAuthors a ON bax.authorId = a.authorId' .
+                    ' LEFT JOIN FilteredUC fuc ON fuc.isbn = b.isbn LEFT JOIN FilteredUW fuw ON fuw.isbn = b.isbn' .
+                    " WHERE b.title LIKE '%$search%' ORDER BY title;";
+                break;
+
+            case "Author":
+                $queryString = 'SELECT b.isbn, b.title, b.price, b.pubDate, b.imageFilename, a.compositeName, fuc.cemail, fuw.wemail FROM tblBooks b' .
+                    ' LEFT JOIN tblBooksAuthorsXref bax ON b.isbn = bax.isbn LEFT JOIN tblAuthors a ON bax.authorId = a.authorId' .
+                    ' LEFT JOIN FilteredUC fuc ON fuc.isbn = b.isbn LEFT JOIN FilteredUW fuw ON fuw.isbn = b.isbn' .
+                    " WHERE a.compositeName LIKE '%$search%' ORDER BY title;";
+                break;
+
+            case "Isbn":
+                $queryString = 'SELECT b.isbn, b.title, b.price, b.pubDate, b.imageFilename, a.compositeName, fuc.cemail, fuw.wemail FROM tblBooks b' .
+                    ' LEFT JOIN tblBooksAuthorsXref bax ON b.isbn = bax.isbn LEFT JOIN tblAuthors a ON bax.authorId = a.authorId' .
+                    ' LEFT JOIN FilteredUC fuc ON fuc.isbn = b.isbn LEFT JOIN FilteredUW fuw ON fuw.isbn = b.isbn' .
+                    " WHERE b.isbn LIKE '%$search%' ORDER BY title;";
+                break;
+        }
     }
 }
 $myConn->set_query_string($queryString);
@@ -76,6 +143,16 @@ $num_rows = $myConn->get_number_of_returned_rows();
 
     <body>
         <div class="inner">
+            <form class="left" id="searchBar" method="post" action="books.php">
+                <input class="left" type="text" name="muse" id="search"/>
+                <select class="left" id="searchOptions" name="category" size="1">
+                    <option selected>Title</option>
+                    <option>Author</option>
+                    <option>Isbn</option>
+                </select>
+                <input class="left" type="submit" id="searchButton" value="SEARCH"/>
+            </form>
+
             <p class="account right"><?php
                 if(!$_SESSION['name']){
                     echo '<a class="login" href="login.html">Login</a>';
@@ -115,14 +192,19 @@ $num_rows = $myConn->get_number_of_returned_rows();
         <div class="inner">
             <div style="margin:auto">
             <h1><?php
-                if (!$genreId) {
+                if (!$genreId && !$search) {
                     echo 'All Books';
+                } elseif (!$genreId){
+                    echo $searchOption . ' results for "'. $search . '"';
                 } else {
                     echo $books->genreName;
                 }
                 ?></h1>
 
             <?php
+            if($num_rows==0){
+                echo '<h3 style="text-align:center;margin-top:60px;">There are no books found under your search</h3>';
+            }
             for ($i = 0; $i < $num_rows; $i++) {
                 if($i != 0){
                     echo '<div class="spacer"></div>';

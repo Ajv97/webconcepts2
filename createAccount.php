@@ -21,7 +21,7 @@
 </a>
 
 <div class="center" id="create">
-    <form method="post" action="emailaccount.php">
+    <form method="post" action="checkaccount.php">
         <h2>Create account</h2>
 
         <label>Your Name</label>

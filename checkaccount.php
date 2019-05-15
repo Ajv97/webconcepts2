@@ -52,31 +52,7 @@ if(!($pass1 == $pass2)){
     die();
 }
 
+header("Location: addaccount.php?email=" . $email . "&pass=" . $pass1 . "&name=" . $name);
+die();
 
-require_once 'db-connect.php';
-
-function sanitize_my_email($field) {
-    $field = filter_var($field, FILTER_SANITIZE_EMAIL);
-    if (filter_var($field, FILTER_VALIDATE_EMAIL)) {
-        return true;
-    } else {
-        return false;
-    }
-}
-$subject = 'Volga Account registration';
-$message = "Hi $name we're sending this email to confirm the email you used when registering an account for Volga book store
-
-copy the link below into your url to confirm account creation
-localhost:8887/volga/addaccount.php?email=" . $email . "&pass=" . $pass1 . "&name=" . $name;
-$headers = 'From: noreply@volga.com';
-//check if the email address is invalid $secure_check
-$secure_check = sanitize_my_email($email);
-
-
-if ($secure_check == false) {
-    echo "Invalid input";
-} else { //send email
-    mail($email, $subject, $message, $headers);
-    echo "This email is sent using PHP Mail";
-}
 ?>

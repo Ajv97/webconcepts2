@@ -53,6 +53,16 @@ session_start();
 
 <body>
 <div class="inner">
+    <form class="left" id="searchBar" method="post" action="books.php">
+        <input class="left" type="text" name="muse" id="search"/>
+        <select class="left" id="searchOptions" name="category" size="1">
+            <option selected>Title</option>
+            <option>Author</option>
+            <option>Isbn</option>
+        </select>
+        <input class="left" type="submit" id="searchButton" value="SEARCH"/>
+    </form>
+
     <p class="account right"><?php
         if (!$_SESSION['name']) {
             echo '<a class="login" href="login.html">Login</a>';
@@ -94,35 +104,34 @@ session_start();
     <?php
     if ($num_rows <= 0) {
         echo '<h3 style="text-align:center;margin-top:60px;">There are no books in your wishlist</h3>';
-    } else {
-        for ($i = 0; $i < $num_rows; $i++) {
-            if ($i != 0) {
-                echo '<div class="spacer"></div>';
-            }
-            echo '<a href="book.php?isbn=' . $books->isbn . '">
+    }
+    for ($i = 0; $i < $num_rows; $i++) {
+        if ($i != 0) {
+            echo '<div class="spacer"></div>';
+        }
+        echo '<a href="book.php?isbn=' . $books->isbn . '">
                     <div class="wishLog">
                         <img class="bookCover left" src="images/books/' . $books->imageFilename . '" alt="The Cover for ' . $books->title . '" width="120">
                         <div class="details left">
                             <h3 style="font-size:20px; line-height:25px; margin-top:20px;"><em>TITLE</em><br>' .
-                $books->title .
-                '</h3>';
+            $books->title .
+            '</h3>';
 
-            echo '</div>
+        echo '</div>
                         <div class="purcahseButtons left">
                             <h2 class="logPrice">$' . sprintf("%.2f", $books->price) . '</h2>';
 
-            if(!$books->cemail){
-                echo '<a href="addcart.php?href=wishlist.php&isbn=' . $books->isbn . '" class="addCart">Add To Cart</a>';
-            } else {
-                echo '<a href="removecart.php?href=wishlist.php&isbn=' . $books->isbn . '" class="addCart" style="font-size:15px">Remove From Cart</a>';
-            }
+        if (!$books->cemail) {
+            echo '<a href="addcart.php?href=wishlist.php&isbn=' . $books->isbn . '" class="addCart">Add To Cart</a>';
+        } else {
+            echo '<a href="removecart.php?href=wishlist.php&isbn=' . $books->isbn . '" class="addCart" style="font-size:15px">Remove From Cart</a>';
+        }
 
-                        echo '<a href="removewishlist.php?href=wishlist.php&isbn=' . $books->isbn . '" class="addWish" style="font-size:12px;">Remove from Wishlist</a>
+        echo '<a href="removewishlist.php?href=wishlist.php&isbn=' . $books->isbn . '" class="addWish" style="font-size:12px;">Remove from Wishlist</a>
                         </div>
                     </div>
                     </a>';
-            $books = $myConn->get_next_result(RETURN_OBJECT);
-        }
+        $books = $myConn->get_next_result(RETURN_OBJECT);
     }
     $queryString = 'DROP TABLE FilteredUC;';
 
